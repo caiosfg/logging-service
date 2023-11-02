@@ -1,18 +1,13 @@
 import express, { Request, Response } from 'express';
-import { LogController } from './controllers/LogController';
+import { router } from './routes';
 
-const logController = new LogController()
+const server = express()
 
-const server = express();
-
-server.use(express.json());
-
+server.use(express.json())
+server.use(router)
 
 server.get('/', (request: Request, response: Response) => {
     return response.status(200).json({ message: 'Logging Service 1.0' })
 })
-
-server.get('/logging', logController.getAllLogs)
-server.post('/logging', logController.createLog )
 
 server.listen(6000, () => console.log('Running on 6000'))
