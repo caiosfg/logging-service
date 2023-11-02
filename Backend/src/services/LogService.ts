@@ -1,3 +1,12 @@
+export interface Log {
+    ip : string,
+    date: string,
+    name: string,
+    id: string,
+    type: string,
+    text: string
+}
+
 const db = [{
     "ip" : "1.1",
     "date": "19-12",
@@ -9,14 +18,22 @@ const db = [{
 
 
 export class LogService {
+    db: Log[]
+
+    constructor(
+        database = db
+    ){
+        this.db = database
+    }
+
     createLog = ( ip: string, date: string, name: string, id: string, type: string, text: string ) => {
         const log = { ip, date, name, id, type, text }
 
-        db.push(log)
-        console.log("🚀 ~ file: LogService.ts:23 ~ LogService ~ log:", db)
+        this.db.push(log)
+        console.log("DB atualized", this.db)
     }
 
     getAllLogs = () => {
-        return db
+        return this.db
     }
 }
