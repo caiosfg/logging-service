@@ -10,7 +10,7 @@ export class LogController {
         this.logService = logService
     }
 
-    createLog = (request: Request, response: Response) => {
+    createLog = (request: Request, response: Response): Response => {
         const body = request.body;
 
         if(!body.ip || !body.date || !body.name || !body.id || !body.type || !body.text){
@@ -22,9 +22,8 @@ export class LogController {
         return response.status(201).json({ message: 'Logging criado' })
     }
 
-    getAllLogs (request: Request, response: Response) {
+    getAllLogs = (request: Request, response: Response) => {
         const logs = this.logService.getAllLogs()
-
         return response.status(200).json({message: logs})
     }
 }

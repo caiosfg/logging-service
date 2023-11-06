@@ -1,26 +1,30 @@
-import { Request, Response } from 'express';
 import { LogService } from '../services/LogService';
 import { LogController } from './LogController';
-import { Params } from 'express-serve-static-core';
-
+import { makeMockResponse } from '../__mocks__/mockResponse.mock';
+import { Request } from 'express';
 
 describe('LogController', () => {
-    const mockLogService : Partial<LogService> = {}
-
-    const logController = new LogController(mockLogService as LogService)
-
-    const makeMockRequest = ({ params, query }: { params?: Params, query?: Params }): Request => {
-        const request = {
-            params: params || {},
-            query: query || {},
-        } as unknown;
-
-        return request as Request
+    const mockLogService : Partial<LogService> = {
+        createLog: jest.fn()
     }
+    const logController = new LogController(mockLogService as LogService)
     
     it('Add new Log', () => {
-        const mockRequest = makeMockRequest({})
+        const mockRequest = {
+            body: {
+                ip : '192.168.0.1',
+                date: '06-11-2023',
+                name: ' Caio',
+                id: '0001',
+                type: 'Alert',
+                text: 'Lorem Ipsum'
+            }
+        } as Request;
 
-        const response = logController.createLog(mockRequest)
+        const mockResponse = makeMockResponse()
+        logController.createLog(mockRequest, mockResponse)
+
+        expect(mockResponse.state.status).toBe(201)
+        expect(mockResponse.state.json).toMatchObject({ message: 'Logging criado' })
     })
 })
