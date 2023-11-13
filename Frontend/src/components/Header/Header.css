@@ -1,0 +1,14 @@
+
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: content-box;
+}
+
+.header {
+    padding: 6px;
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    background-color: #6e182c;
+    height: 30px;
+}
