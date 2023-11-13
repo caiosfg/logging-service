@@ -1,5 +1,14 @@
 import { Layout } from "./components/Layout";
 import styled from "styled-components";
+import { 
+  ChakraProvider,
+  Tabs, 
+  TabList,
+  TabPanels,
+  Tab, 
+  TabPanel,
+  Input
+} from '@chakra-ui/react'
 
 
 const Box = styled.div`
@@ -11,28 +20,35 @@ const Box = styled.div`
 
 function App() {
   return (
-    <Layout>
-        <div>
-          <Box>
-            <h1>Faça o Login</h1>
-          </Box>
-          <p>Para acesso a plataforma de logs.</p>
-          <label htmlFor="emailInput">
-            Email
-          </label>
-          <input id="emailInput" type="email" />
+    <ChakraProvider>
+      <Layout>
+          <div>
+            <Tabs size='md' variant='enclosed' colorScheme='white'>
+              <Box>
+                  <TabList>
+                    <Tab as='b'>Faça o Login</Tab>
+                    <Tab as='b'>Logs</Tab>
+                  </TabList>
+              </Box>
+              <TabPanels>
+                  <TabPanel>
+                    <p>one!</p>
+                  </TabPanel>
+                  <TabPanel>
+                    <p>two!</p>
+                  </TabPanel>
+              </TabPanels>
+            </Tabs>
 
-          <label htmlFor="passwordInput">
-            Senha
-          </label>
-          <input id="passwordInput"  type="password" />
+            <Input placeholder="email" />
+            <Input placeholder="password" />
 
-
-          <button>
-            Entrar
-          </button>
-        </div>
-    </Layout>
+            <button>
+              Entrar
+            </button>
+          </div>
+      </Layout>
+    </ChakraProvider>
   );
 }
 

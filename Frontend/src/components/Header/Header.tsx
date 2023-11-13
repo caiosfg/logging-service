@@ -1,9 +1,14 @@
 import './Header.css'
+import { ChakraProvider, Text, Box } from '@chakra-ui/react'
 
 export const Header =  () => {
     return(
-        <div className='header'>
-            <p>Logging Service</p>
-        </div>
+        <ChakraProvider>
+            <div className='header'>
+                <Box pl={2}>
+                    <Text fontSize='lg' as='b'>Logging Service</Text>
+                </Box>
+            </div>
+        </ChakraProvider>
     )
 }
