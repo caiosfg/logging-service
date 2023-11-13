@@ -16,6 +16,7 @@ import {
   CardBody, 
   CardFooter
 } from '@chakra-ui/react'
+import { login } from "./services/login";
 
 
 const Boxes = styled.div`
@@ -50,6 +51,7 @@ function App() {
                           colorScheme='teal'
                           variant='outline'
                           mt='6'
+                          onClick={login}
                         >
                           Entrar
                         </Button>
