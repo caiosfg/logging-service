@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Layout } from "./components/Layout";
 import styled from "styled-components";
 import { 
@@ -27,6 +28,15 @@ const Boxes = styled.div`
 `
 
 function App() {
+  const [ email, setEmail ] =  useState('');
+  console.log("🚀 ~ file: App.tsx:32 ~ App ~ email:", email)
+
+
+  const logar = () => {
+    alert(email)
+  }
+
+  
   return (
     <ChakraProvider>
       <Layout>
@@ -42,16 +52,14 @@ function App() {
                   <TabPanel>
                     <Box minHeight='80vh'>
                       <Box boxShadow='lg' padding='6' margin='6' rounded='md' bg='white'>
-                        <Input placeholder="email" />
+                        <Input placeholder="email" value={ email } onChange={ (event) => setEmail(event.target.value) } />
                         <Input mt='2' placeholder="password" />
 
                         <Button
-                          isLoading
-                          loadingText='Entrando'
                           colorScheme='teal'
                           variant='outline'
                           mt='6'
-                          onClick={login}
+                          onClick={ () => login(email) }
                         >
                           Entrar
                         </Button>
