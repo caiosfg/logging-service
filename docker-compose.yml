@@ -1,0 +1,49 @@
+version: '3.8'
+services:
+  service-app:
+    container_name: service-app
+    image: service-app
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/frontend
+      - /frontend/node_modules
+    links:
+      - logging-backend
+    networks:
+      - logging-app
+  logging-backend:
+    container_name: logging-backend
+    build:
+      context: backend
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "6000:6000"
+    volumes:
+      - ./backend:/backend
+      - /backend/backend
+    networks:
+      - logging-app
+    depends_on:
+      - mongo
+  mongo:
+    container_name: mongo
+    image: mongo:3.6.19-xenial
+    restart: always
+    ports:
+      - "27017:27017"
+    networks:
+      - logging-app
+    volumes:
+      - mongo-data:/data/db
+networks:
+  logging-app:
+    driver: bridge
+volumes:
+  mongo-data:
+    driver: local
