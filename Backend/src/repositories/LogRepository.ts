@@ -1,12 +1,11 @@
 import { EntityManager } from "typeorm";
-import { AppDataSource } from "../database";
 import { Log } from "../entities/Log";
 
 export class LogRepository {
     private manager: EntityManager
 
     constructor(
-        manager = AppDataSource.manager
+        manager: EntityManager
     ) {
         this.manager =  manager
     }
