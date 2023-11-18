@@ -26,4 +26,10 @@ export class LogController {
         const logs = this.logService.getAllLogs()
         return response.status(200).json({message: logs})
     }
+
+    deleteLog = (request: Request, response: Response) => {
+        const logs = request.body
+        console.log("deleteLog ~ logs:", logs)
+        return response.status(200).json({message: 'log deletado'})
+    }
 }
