@@ -10,7 +10,15 @@ export class LogRepository {
         this.manager =  manager
     }
 
-    createLog = async (log: Log ) => {
+    createLog = async (log: Log ): Promise<Log> => {
         return this.manager.save(log)
+    }
+
+    getLog = async (logId: string): Promise<Log | null> => {
+        return this.manager.findOne(Log, {
+            where: {
+                log_id: logId
+            }
+        })
     }
 }

@@ -1,39 +1,23 @@
-export interface Log {
-    ip : string,
-    date: string,
-    name: string,
-    id: string,
-    type: string,
-    text: string
-}
-
-const db = [{
-    "ip" : "1.1",
-    "date": "19-12",
-    "name": "caio",
-    "id": "1212",
-    "type": "warning",
-    "text": "lorem ipsum"
-}]
-
+import { AppDataSource } from '../database';
+import { Log } from '../entities/Log';
+import { LogRepository } from './../repositories/LogRepository';
 
 export class LogService {
-    db: Log[]
+    private logRepository: LogRepository
 
     constructor(
-        database = db
+        logRepository = new LogRepository(AppDataSource.manager)
     ){
-        this.db = database
+        this.logRepository =  logRepository
     }
 
-    createLog = ( ip: string, date: string, name: string, id: string, type: string, text: string ) => {
-        const log = { ip, date, name, id, type, text }
+    createLog = async ( ip: string, date: string, name: string, type: string, text: string ): Promise<Log> => {
+        const log = new Log(ip, date, name, type, text)
 
-        this.db.push(log)
-        console.log("DB atualized", this.db)
+        return this.logRepository.createLog(log)
     }
 
-    getAllLogs = () => {
-        return this.db
+    getLog = () => {
+        // return this.db
     }
 }

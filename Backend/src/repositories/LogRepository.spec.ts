@@ -16,11 +16,14 @@ describe('LogRepository', () => {
     }
 
     beforeAll(async () => {
-        managerMock = await getMockEntityManager({})
+        managerMock = await getMockEntityManager({
+            saveReturn: mockLog
+        })
         logRepository = new LogRepository(managerMock as EntityManager)
     })
     it('Cadastar um novo log no banco', async () => {
-        await logRepository.createLog(mockLog)
+        const response = await logRepository.createLog(mockLog)
         expect(managerMock.save).toHaveBeenCalled()
+        expect(response).toMatchObject(mockLog)
     })
 })
