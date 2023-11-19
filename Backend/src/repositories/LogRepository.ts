@@ -17,7 +17,7 @@ export class LogRepository {
     getLog = async (logId: string): Promise<Log | null> => {
         return this.manager.findOne(Log, {
             where: {
-                log_id: logId
+                id_log: logId
             }
         })
     }

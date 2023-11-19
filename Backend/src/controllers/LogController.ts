@@ -13,18 +13,17 @@ export class LogController {
     createLog = (request: Request, response: Response): Response => {
         const body = request.body;
 
-        if(!body.ip || !body.date || !body.name || !body.id || !body.type || !body.text){
+        if(!body.ip || !body.date || !body.name || !body.type || !body.text){
             return response.status(400).json({message: 'Bad Request'})
         }
 
-        this.logService.createLog( body.ip, body.date, body.name, body.id, body.type, body.text )
+        this.logService.createLog( body.ip, body.date, body.name, body.type, body.text )
 
         return response.status(201).json({ message: 'Logging criado' })
     }
 
-    getAllLogs = (request: Request, response: Response) => {
-        const logs = this.logService.getAllLogs()
-        return response.status(200).json({message: logs})
+    getLog = (request: Request, response: Response) => {
+        return response.status(200).json()
     }
 
     deleteLog = (request: Request, response: Response) => {

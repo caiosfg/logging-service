@@ -7,7 +7,7 @@ describe('LogRepository', () => {
     let managerMock: Partial<EntityManager>
 
     const mockLog: Log = {
-        log_id: '0001',
+        id_log: '0001',
         ip: '192.168.0.1' ,
         date: '16-11-2023' ,
         name:  'New Test',

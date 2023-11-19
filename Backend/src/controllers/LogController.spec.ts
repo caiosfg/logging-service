@@ -1,13 +1,22 @@
-import { LogService } from '../services/LogService';
 import { LogController } from './LogController';
 import { makeMockResponse } from '../__mocks__/mockResponse.mock';
 import { Request } from 'express';
 
-describe('LogController', () => {
-    const mockLogService : Partial<LogService> = {
-        createLog: jest.fn()
+
+const mockLogService = {
+    createLog: jest.fn()
+}
+
+jest.mock('./../services/LogService', () => {
+    return {
+        LogService: jest.fn().mockImplementation(() => {
+            return mockLogService
+        })
     }
-    const logController = new LogController(mockLogService as LogService)
+})
+
+describe('LogController', () => {
+    const logController = new LogController()
     
     it('Add new Log', () => {
         const mockRequest = {

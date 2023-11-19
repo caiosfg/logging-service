@@ -4,7 +4,7 @@ import { randomUUID } from 'crypto'
 @Entity('logs')
 export class Log {
     @PrimaryGeneratedColumn()
-    log_id: string
+    id_log: string
 
     @Column({ nullable: false })
     ip: string
@@ -28,7 +28,7 @@ export class Log {
         type: string,
         text: string,
     ) {
-        this.log_id = randomUUID()
+        this.id_log = randomUUID()
         this.ip = ip
         this.date = date
         this.name = name
